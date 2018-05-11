@@ -1,4 +1,4 @@
-import telepot
+import urllib
 import time
 import requests
 import json
@@ -27,11 +27,10 @@ def get_last_chat_id_and_text(updates):
     chat_id = updates["result"][last_update]["message"]["chat"]["id"]
     return (text, chat_id)
 
-
 def send_message(text, chat_id):
-    url = URL + "sendMessage?text={}&chat_id={}".format(text, '259050169')
+    text = urllib.parse.quote_plus(text)
+    url = URL + "sendMessage?text={}&chat_id={}".format(text, chat_id)
     get_url(url)
-
 
 def main():
     last_textchat = (None, None)
